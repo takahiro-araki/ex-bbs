@@ -10,12 +10,19 @@
 		<h1>掲示板アプリケーション</h1>
 		投稿者名：<input type="text" name="name" th:field="*{name}"><br>
 		投稿者内容：
-		<textarea name="content" th:field="*{content}"></textarea><br>
+		<textarea name="content" th:field="*{content}"></textarea>
+		<br>
 		<button>記事投稿</button>
 		<div th:each="article:${articleList}">
 			<br> 投稿者ID:<span th:text="${article.id}"></span><br> 投稿者名:<span
 				th:text="${article.name}"></span><br> 投稿内容:<span
 				th:text="${article.content}"></span>
+			<div th:each="comment:${article.commentList}">
+				<br> コメントID:<span th:text="${comment.id}"></span> コメント者名：<span
+					th:text="${comment.name}"></span> コメント内容：<span
+					th:text="${comment.content}"></span>
+			</div>
+			
 			<hr>
 		</div>
 	</form>

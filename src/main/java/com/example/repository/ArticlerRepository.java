@@ -43,9 +43,9 @@ public class ArticlerRepository {
 	}
 
 	/**
-	 * 新規で入力されたnameとcontentを、DBへ格納する.
+	 *記事情報を挿入する.
 	 * 
-	 * @param 新規入力情報の入ったarticleオブジェクト
+	 * @param 記事情報
 	 */
 	public void insert(Article article) {
 		String insertSql = "INSERT INTO articles (name,content) VALUES(:name,:content)";
