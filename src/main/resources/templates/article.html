@@ -18,12 +18,15 @@
 		<br> 投稿者ID:<span th:text="${article.id}"></span><br> 投稿者名:<span
 			th:text="${article.name}"></span><br> 投稿内容:<span
 			th:text="${article.content}"></span>
+		<form th:action="@{/article/delete}" th:method="post">
+			<input type="hidden" name="id" th:value="${article.id}">
+			<button>記事削除</button>
+		</form>
 		<div th:each="comment:${article.commentList}">
 			<br> コメントID:<span th:text="${comment.id}"></span> コメント者名：<span
 				th:text="${comment.name}"></span> コメント内容：<span
 				th:text="${comment.content}"></span>
 		</div>
-
 		<form th:action="@{/article/inputComment}" th:method="post"
 			th:object="${commentForm}">
 			名前：<input type="text" name="name" th:field="*{name}"> <br>

@@ -33,7 +33,7 @@ public class ArticleController {
 	private CommentRepository commentRepository;
 
 	/**
-	 * リクエストパラメーターを格納するフォームをリターンする.
+	 * 記事リクエストパラメーターを格納する記事フォームをリターンする.
 	 * 
 	 * @return
 	 */
@@ -42,6 +42,10 @@ public class ArticleController {
 		return new ArticleForm();
 	}
 	
+	/**
+	 * コメントリクエストパラメーターを格納するコメントフォームをリターンする.
+	 * @return
+	 */
 	@ModelAttribute
 	public CommentForm setupCommentForm() {
 		return new CommentForm();
@@ -96,7 +100,18 @@ public class ArticleController {
 		comment.setArticleId(intArticleId);
 		commentRepository.insert(comment);
 		return "redirect:";
-		
+	}
+	
+	/**
+	 * 記事idに紐づいた記事とコメントを削除.
+	 * @param リクエストパラメータ記事id
+	 * @return　記事・コメント全件表示画面を表示
+	 */
+	@RequestMapping("/delete")
+	public String deleteArticle(Integer id) {
+		commentRepository.deleteByArticleId(id);
+		articlerRepository.deleateById(id);
+		return "redirect:";
 	}
 
 }

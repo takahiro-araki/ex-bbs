@@ -53,5 +53,15 @@ public class ArticlerRepository {
 				article.getContent());
 		template.update(insertSql, param);
 	}
+	
+	/**
+	 * 主キーで指定したレコードを削除.
+	 * @param 記事id
+	 */
+	public void deleateById(int id) {
+		String deleteSql="DELETE   FROM articles WHERE id=:id";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+		template.update(deleteSql, param);
+	}
 
 }
