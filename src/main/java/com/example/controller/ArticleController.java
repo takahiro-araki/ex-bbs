@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.domain.Article;
 import com.example.domain.Comment;
 import com.example.form.ArticleForm;
+import com.example.form.CommentForm;
 import com.example.repository.ArticlerRepository;
 import com.example.repository.CommentRepository;
 
@@ -37,8 +38,13 @@ public class ArticleController {
 	 * @return
 	 */
 	@ModelAttribute
-	public ArticleForm setupForm() {
+	public ArticleForm setupArticleForm() {
 		return new ArticleForm();
+	}
+	
+	@ModelAttribute
+	public CommentForm setupCommentForm() {
+		return new CommentForm();
 	}
 
 	/**
@@ -74,6 +80,23 @@ public class ArticleController {
 		article.setContent(articleForm.getContent());
 		articlerRepository.insert(article);
 		return "redirect:";
+	}
+	
+	/**
+	 * 投稿したコメントを画面に表示する．
+	 * @param リクエストパラメータを受け取ったフォーム
+	 * @return　記事・コメント全表示画面
+	 */
+	@RequestMapping("/inputComment")
+	public String insertComment(CommentForm commentForm) {
+		Comment comment=new Comment();
+		int intArticleId=Integer.parseInt(commentForm.getArticleId());
+		comment.setName(commentForm.getName());
+		comment.setContent(commentForm.getContent());
+		comment.setArticleId(intArticleId);
+		commentRepository.insert(comment);
+		return "redirect:";
+		
 	}
 
 }
